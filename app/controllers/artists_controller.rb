@@ -8,7 +8,7 @@ class ArtistsController < ApplicationController
      @artists = Artist.all
    end
  end
-  
+
   #def index
     #p = Preference.first_or_create(artist_sort_order: "ASC")
   #  binding.pry
@@ -20,10 +20,10 @@ class ArtistsController < ApplicationController
   end
 
   def new
-    p = Preference.first 
-    if p && !p.allow_create_artists 
+    p = Preference.first
+    if p && !p.allow_create_artists
       redirect_to artists_path
-    else 
+    else
       @artist = Artist.new
     end
   end
