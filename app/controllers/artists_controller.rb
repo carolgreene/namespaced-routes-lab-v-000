@@ -1,9 +1,19 @@
 class ArtistsController < ApplicationController
+  before_action :set_preferences, only: [:index, :new]
+
   def index
-    p = Preference.first_or_create(artist_sort_order: "ASC")
+   if @preferences && @preferences.artist_sort_order
+     @artists = Artist.order(name: @preferences.artist_sort_order)
+   else
+     @artists = Artist.all
+   end
+ end
+  
+  #def index
+    #p = Preference.first_or_create(artist_sort_order: "ASC")
   #  binding.pry
-    @artists = Artist.order(name: p.artist_sort_order)
-  end
+    #@artists = Artist.order(name: p.artist_sort_order)
+  #end
 
   def show
     @artist = Artist.find(params[:id])
